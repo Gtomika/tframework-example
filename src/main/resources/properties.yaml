@@ -1,0 +1,5 @@
+repository:
+  file-path: data.csv
+
+web:
+  port: 8080
