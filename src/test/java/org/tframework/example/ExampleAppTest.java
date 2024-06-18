@@ -2,7 +2,6 @@ package org.tframework.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.tframework.example.controller.PersonController;
 import org.tframework.example.model.Person;
 import org.tframework.test.commons.annotations.SetProfiles;
 import org.tframework.test.junit5.TFrameworkTest;
@@ -33,8 +32,7 @@ public class ExampleAppTest {
     @Test
     public void getPersonByName_shouldReturnExistingPerson() throws Exception {
         String encodedName = URLEncoder.encode(EXISTING_PERSON_NAME, StandardCharsets.UTF_8);
-        String existingPersonPath = PersonController.PERSON_BY_NAME_ENDPOINT
-                .replace("{name}", encodedName);
+        String existingPersonPath = "/person/{name}".replace("{name}", encodedName);
 
         String rawResponse = makeHttpRequest(existingPersonPath, "GET");
         Person person = objectMapper.readValue(rawResponse, Person.class);
@@ -47,8 +45,7 @@ public class ExampleAppTest {
     public void getPersonByName_shouldReturn404ForNonExistingPerson() throws Exception {
         try {
             String encodedName = URLEncoder.encode(NON_EXISTING_PERSON_NAME, StandardCharsets.UTF_8);
-            String nonExistingPersonPath = PersonController.PERSON_BY_NAME_ENDPOINT
-                    .replace("{name}", encodedName);
+            String nonExistingPersonPath = "/person/{name}".replace("{name}", encodedName);
             makeHttpRequest(nonExistingPersonPath, "GET");
             fail("Expected exception not thrown.");
         } catch (RuntimeException e) {

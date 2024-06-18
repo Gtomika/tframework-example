@@ -14,8 +14,8 @@ repositories {
 }
 
 ext {
-    tframeworkVersion = "0.0.3"
-    tframeworkTestVersion = "0.0.3"
+    tframeworkVersion = "0.0.4"
+    tframeworkTestVersion = "0.0.4"
     log4jVersion = "2.20.0"
     javalinVersion = "6.1.3"
     jacksonVersion = "2.17.1"
