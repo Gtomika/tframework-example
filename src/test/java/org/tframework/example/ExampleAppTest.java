@@ -1,6 +1,7 @@
 package org.tframework.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.tframework.example.model.Person;
 import org.tframework.test.commons.annotations.SetProfiles;
@@ -28,6 +29,12 @@ public class ExampleAppTest {
     private static final String NON_EXISTING_PERSON_NAME = "Some Body";
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
+
+    @BeforeEach
+    public void setUp() throws Exception {
+        // The application is already running at this point, but the Java HTTP server may not be ready yet
+        Thread.sleep(500);
+    }
 
     @Test
     public void getPersonByName_shouldReturnExistingPerson() throws Exception {

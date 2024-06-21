@@ -23,6 +23,7 @@ It will initialize the TFramework and also the [Javalin](https://javalin.io/) se
   the [log4j2.xml](./src/main/resources/log4j2.xml) file.
 - For the endpoints, see [PersonController](./src/main/java/org/tframework/example/controller/PersonController.java)
   and [WebConfig](./src/main/java/org/tframework/example/config/WebConfig.java).
+- Be sure to download the Javadoc and sources of the TFramework to see the documentation in your IDE. 
 
 ## Tests
 
