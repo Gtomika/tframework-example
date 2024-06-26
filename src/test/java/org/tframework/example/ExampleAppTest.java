@@ -1,9 +1,10 @@
 package org.tframework.example;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.tframework.example.config.WebConfig;
 import org.tframework.example.model.Person;
+import org.tframework.test.commons.annotations.EventDelay;
 import org.tframework.test.commons.annotations.SetProfiles;
 import org.tframework.test.junit5.TFrameworkTest;
 
@@ -21,6 +22,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 @TFrameworkTest // launches the application before running the tests, closes it after
 @SetProfiles("test") //will activate the 'properties-test.yaml' file in the test resources folder
+@EventDelay(topic = WebConfig.WEB_SERVER_INITIALIZED_EVENT) //test will not start until web server is up
 public class ExampleAppTest {
 
     private static final String BASE_URL = "http://localhost:8080";
@@ -29,12 +31,6 @@ public class ExampleAppTest {
     private static final String NON_EXISTING_PERSON_NAME = "Some Body";
 
     private static final ObjectMapper objectMapper = new ObjectMapper();
-
-    @BeforeEach
-    public void setUp() throws Exception {
-        // The application is already running at this point, but the Java HTTP server may not be ready yet
-        Thread.sleep(500);
-    }
 
     @Test
     public void getPersonByName_shouldReturnExistingPerson() throws Exception {
