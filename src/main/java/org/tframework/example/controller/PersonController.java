@@ -30,6 +30,7 @@ public class PersonController {
         Handler handler = ctx -> {
             var name = URLDecoder.decode(ctx.pathParam("name"), StandardCharsets.UTF_8);
             ctx.json(personService.getPersonByName(name));
+            log.info("Served person by name request, name: {}", name);
         };
         return new Endpoint(HandlerType.GET, PERSON_BY_NAME_ENDPOINT, handler);
     }
@@ -39,6 +40,7 @@ public class PersonController {
         Handler handler = ctx -> {
             var age = Integer.parseInt(ctx.pathParam("age"));
             ctx.json(personService.getPersonsOlderThan(age));
+            log.info("Served persons older than request, age: {}", age);
         };
         return new Endpoint(HandlerType.GET, PERSONS_OLDER_THAN_ENDPOINT, handler);
     }

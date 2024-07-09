@@ -7,6 +7,7 @@ group = 'org.tframework.example'
 version = '1.0'
 
 repositories {
+    mavenLocal()
     mavenCentral()
     maven {
         url "https://jitpack.io"
@@ -14,11 +15,11 @@ repositories {
 }
 
 ext {
-    tframeworkVersion = "0.0.5"
+    tframeworkVersion = "0.1.0"
     tframeworkTestVersion = "0.0.5"
-    log4jVersion = "2.20.0"
     javalinVersion = "6.1.3"
     jacksonVersion = "2.17.1"
+    slf4jSimpleVersion = "2.0.13"
 }
 
 application {
@@ -27,9 +28,15 @@ application {
 
 dependencies {
     implementation "com.github.Gtomika:tframework-core:${tframeworkVersion}"
+
+//    if you want a custom logging implementation, you can exclude the default one and add your own
+//    implementation ("com.github.Gtomika:tframework-core:${tframeworkVersion}") {
+//        exclude group: 'org.apache.logging.log4j', module: 'log4j-slf4j2-impl'
+//    }
+//    implementation "org.slf4j:slf4j-simple:${slf4jSimpleVersion}"
+
     implementation "io.javalin:javalin:${javalinVersion}"
     implementation "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}"
-    implementation "org.apache.logging.log4j:log4j-slf4j2-impl:${log4jVersion}"
 
     testImplementation "com.github.gtomika:tframework-test:${tframeworkTestVersion}"
     testImplementation platform('org.junit:junit-bom:5.9.1')

@@ -11,6 +11,8 @@ import org.tframework.core.events.CoreEvents;
 import org.tframework.core.events.EventManager;
 import org.tframework.core.events.annotations.Subscribe;
 
+import java.util.List;
+
 /**
  * The web config collects all {@link Endpoint} elements and stats the Javalin server with them.
  * Port is injected from the properties file. Note the {@link Subscribe} annotation on the method:
@@ -27,14 +29,15 @@ public class WebConfig {
     @InjectElement
     private EventManager eventManager;
 
+    //will inject a list with all Endpoint elements
+    @InjectElement
+    private List<Endpoint> endpoints;
+
     @Subscribe(CoreEvents.APPLICATION_INITIALIZED)
     public void createJavalinServer(Application application) {
         var server = Javalin.create()
                 .events(this::fireWebServerInitializedEvent);
-        application.getElementsContainer().getElementContextsWithType(Endpoint.class)
-                .stream()
-                .map(context -> (Endpoint) context.requestInstance())
-                .forEach(server::addEndpoint);
+        endpoints.forEach(server::addEndpoint);
         server.start(port);
     }
 

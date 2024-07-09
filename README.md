@@ -19,8 +19,8 @@ It will initialize the TFramework and also the [Javalin](https://javalin.io/) se
 ## Notes
 
 - The TFramework has no web module (yet?), so [Javalin](https://javalin.io/) was used as a replacement.
-- By default, the log level is info. If you want to see more logs, change it in 
-  the [log4j2.xml](./src/main/resources/log4j2.xml) file.
+- By default, log4j2 is used and the log level is info. If you want to see more logs, you can find a *DEBUG*
+configuration in the [log4j2.xml](./devtools/log4j2.xml) file, which you can copy into `src/main/resources`.
 - For the endpoints, see [PersonController](./src/main/java/org/tframework/example/controller/PersonController.java)
   and [WebConfig](./src/main/java/org/tframework/example/config/WebConfig.java).
 - Be sure to download the Javadoc and sources of the TFramework to see the documentation in your IDE. 
