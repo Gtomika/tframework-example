@@ -7,6 +7,7 @@ import org.tframework.core.Application;
 import org.tframework.core.elements.annotations.Element;
 import org.tframework.core.elements.annotations.InjectElement;
 import org.tframework.core.elements.annotations.InjectProperty;
+import org.tframework.core.elements.context.filter.annotation.RequiredElement;
 import org.tframework.core.events.CoreEvents;
 import org.tframework.core.events.EventManager;
 import org.tframework.core.events.annotations.Subscribe;
@@ -19,6 +20,7 @@ import java.util.List;
  * it will run after we are sure that all elements are initialized.
  */
 @Element
+@RequiredElement(type = Endpoint.class)
 public class WebConfig {
 
     public static final String WEB_SERVER_INITIALIZED_EVENT = "web.server.initialized";

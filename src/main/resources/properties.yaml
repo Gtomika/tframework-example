@@ -1,5 +1,6 @@
 repository:
   file-path: data.csv
+  separator: ","
 
 web:
   port: 8080

@@ -2,7 +2,7 @@ package org.tframework.example.repository;
 
 import lombok.Getter;
 import org.tframework.core.elements.annotations.Element;
-import org.tframework.core.elements.annotations.InjectProperty;
+import org.tframework.core.elements.annotations.InjectElement;
 import org.tframework.core.elements.postprocessing.annotations.PostInitialization;
 import org.tframework.example.model.Person;
 
@@ -13,8 +13,8 @@ import java.util.List;
 @Element
 public class PersonRepository {
 
-    @InjectProperty("repository.file-path")
-    private String filePath;
+    @InjectElement
+    private RepositoryProperties props;
 
     @Getter
     private List<Person> persons;
@@ -23,7 +23,7 @@ public class PersonRepository {
     public void loadPersons() throws Exception {
         //read file from filePath from the resources folder
         //parse the file and create a list of persons
-        try (var file = getClass().getClassLoader().getResourceAsStream(filePath)) {
+        try (var file = getClass().getClassLoader().getResourceAsStream(props.getFilePath())) {
             persons = new BufferedReader(new InputStreamReader(file))
                     .lines()
                     .map(this::csvLineToPerson)
@@ -32,7 +32,7 @@ public class PersonRepository {
     }
 
     private Person csvLineToPerson(String line) {
-        String[] parts = line.split(",");
+        String[] parts = line.split(props.getSeparator());
         return new Person(parts[0], Integer.parseInt(parts[1]), parts[2]);
     }
 
