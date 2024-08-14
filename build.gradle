@@ -7,7 +7,7 @@ group = 'org.tframework.example'
 version = '1.0'
 
 repositories {
-    mavenLocal()
+    //mavenLocal()
     mavenCentral()
     maven {
         url "https://jitpack.io"
@@ -15,8 +15,8 @@ repositories {
 }
 
 ext {
-    tframeworkVersion = "0.2.0"
-    tframeworkTestVersion = "0.0.5"
+    tframeworkVersion = "0.4.0"
+    tframeworkTestVersion = "0.6.0-pre"
     javalinVersion = "6.1.3"
     jacksonVersion = "2.17.1"
     slf4jSimpleVersion = "2.0.13"

@@ -35,12 +35,21 @@ public class WebConfig {
     @InjectElement
     private List<Endpoint> endpoints;
 
+    private Javalin server;
+
     @Subscribe(CoreEvents.APPLICATION_INITIALIZED)
     public void createJavalinServer(Application application) {
-        var server = Javalin.create()
+        server = Javalin.create()
                 .events(this::fireWebServerInitializedEvent);
         endpoints.forEach(server::addEndpoint);
         server.start(port);
+    }
+
+    @Subscribe(CoreEvents.APPLICATION_SHUTTING_DOWN)
+    public void stopJavalinServer(Application application) {
+        if(server != null) {
+            server.stop();
+        }
     }
 
     /**
