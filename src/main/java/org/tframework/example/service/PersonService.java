@@ -26,5 +26,4 @@ public class PersonService {
                 .filter(person -> person.age() > age)
                 .toList();
     }
-
 }

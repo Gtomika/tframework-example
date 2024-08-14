@@ -44,5 +44,4 @@ public class PersonController {
         };
         return new Endpoint(HandlerType.GET, PERSONS_OLDER_THAN_ENDPOINT, handler);
     }
-
 }
